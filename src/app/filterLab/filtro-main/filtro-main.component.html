@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Ejemplo del uso de un filtro</h1>
+<hr />
+
+<div id="paginacion" class="container-fluid d-flex gap-2 mb-2">
+  <button class="btn btn-primary" (click)="prevPage()">anterior</button>
+  <button class="btn btn-primary" (click)="nextPage()" [disabled]="(pokemonList | filtro : page : search).length === 0">siguiente</button>
+  <input type="text" class="form-control" placeholder="Buscar Pokemon...." #txtSearch (keyup)="onSearchPokemon(txtSearch.value)">
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th [ngStyle]="{ width: '50px' }">#</th>
+      <th [ngStyle]="{ width: '150px' }">nombre</th>
+      <th [ngStyle]="{ width: '250px' }">sprite</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let pokemon of pokemonList | filtro : page : search"
+      [ngStyle]="{ height: '150px' }"
+    >
+      <td>{{ pokemon.id }}</td>
+      <td class="d-flex align-items-center justify-content-center">
+        <h2>{{ pokemon.name }}</h2>
+      </td>
+      <td>
+        <img
+          [src]="pokemon.pic"
+          [alt]="pokemon.name"
+          [ngStyle]="{ width: '200px' }"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
